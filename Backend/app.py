@@ -7,10 +7,13 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 
 # Konfigurasi MySQL
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'sms_ai'
+import os
+
+app.config['MYSQL_HOST'] = os.getenv('MYSQLHOST')
+app.config['MYSQL_USER'] = os.getenv('MYSQLUSER')
+app.config['MYSQL_PASSWORD'] = os.getenv('MYSQLPASSWORD')
+app.config['MYSQL_DB'] = os.getenv('MYSQLDATABASE')
+app.config['MYSQL_PORT'] = int(os.getenv('MYSQLPORT'))
 
 mysql = MySQL(app)
 
@@ -66,4 +69,5 @@ def home():
 
 
 if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
     app.run(debug=True)

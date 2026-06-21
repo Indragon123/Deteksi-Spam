@@ -37,18 +37,18 @@ def home():
         if text_input:
             # Cek apakah model berhasil dimuat
             if model is None:
-                prediksi = "❌ Error: Model tidak berhasil dimuat."
+                prediksi = "Error: Model tidak berhasil dimuat."
             else:
                 # Lakukan prediksi
                 hasil = model.predict([text_input])[0]
 
                 # Format hasil prediksi
                 if hasil == 'penipuan':
-                    prediksi = "🚨 HATI-HATI! Ini SMS PENIPUAN."
+                    prediksi = "HATI-HATI! Ini SMS PENIPUAN."
                 elif hasil == 'promo':
-                    prediksi = "🏷️ Ini hanya SMS PROMO."
+                    prediksi = "Ini hanya SMS PROMO."
                 else:
-                    prediksi = "✅ Aman. Ini SMS NORMAL."
+                    prediksi = "Aman. Ini SMS NORMAL."
 
                 # Simpan ke database
                 try:

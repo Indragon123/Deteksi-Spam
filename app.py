@@ -16,6 +16,35 @@ app.config['MYSQL_PASSWORD'] = os.getenv('MYSQLPASSWORD')
 app.config['MYSQL_DB'] = os.getenv('MYSQLDATABASE')
 
 mysql = MySQL(app)
+print("HOST =", repr(os.getenv("MYSQLHOST")))
+print("PORT =", repr(os.getenv("MYSQLPORT")))
+print("USER =", repr(os.getenv("MYSQLUSER")))
+print("DB =", repr(os.getenv("MYSQLDATABASE")))
+print("MYSQL_URL =", os.getenv("MYSQL_URL"))
+
+import os
+
+print("ALL MYSQL ENV:")
+for k, v in os.environ.items():
+    if "MYSQL" in k:
+        print(k, "=", repr(v))
+
+import MySQLdb
+
+try:
+    conn = MySQLdb.connect(
+        host=os.getenv("MYSQLHOST"),
+        port=int(os.getenv("MYSQLPORT")),
+        user=os.getenv("MYSQLUSER"),
+        passwd=os.getenv("MYSQLPASSWORD"),
+        db=os.getenv("MYSQLDATABASE")
+    )
+
+    print("✅ Database Connected")
+    conn.close()
+
+except Exception as e:
+    print("❌ Database Error:", e)
 
 # Load model dengan path absolut
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
